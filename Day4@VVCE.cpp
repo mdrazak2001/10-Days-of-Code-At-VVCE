@@ -7,19 +7,25 @@ using namespace std;
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
 
-    queue<int> q;
-    int k ; cin >> k ;
-    while(k--) {
-        int num ; cin >> num ;
-        if( num == 1 ){
-            int n; cin >> n;
-            q.push(n);
+    stack<int> s1 , s2 ;
+    int q ; cin >> q ;
+    while(q--) {
+        int n ; cin >> n ;
+        if( n == 1 ) {
+            int num ; cin >> num ;
+            s1.push(num) ;
         }
-        if( num == 2 ) {
-           if(!q.empty()) q.pop();
-        }
-        else if( num == 3 ) {
-            cout << q.front() << endl ;
+        else {
+            if( s2.empty() ) {
+                while(!s1.empty()) {
+                    s2.push(s1.top());
+                    s1.pop();
+                }
+            }
+             if( !s2.empty() ){
+                if( n == 2 ) s2.pop();
+                if( n == 3 ) cout << s2.top() << endl ; 
+            }
         }
     }
     return 0;
